@@ -1,0 +1,12 @@
+<div class="collection">
+    <a [routerLink]="['/curso', curso.id]" class="collection-item" *ngFor="let curso of cursos">{{ curso.nome }}</a>
+</div>
+
+<br>
+
+<ul class="pagination">
+    <li class="disabled"><a href="#!"><i class="material-icons">chevron_left</i></a></li>
+    <li routerLinkActive="active" class="waves-effect"><a routerLink="/cursos" [queryParams]="{ pagina: 1 }">1</a></li>
+    <li routerLinkActive="active" class="waves-effect"><a routerLink="/cursos" [queryParams]="{ pagina: 2 }">2</a></li>
+    <li class="waves-effect"><a href="#!"><i class="material-icons">chevron_right</i></a></li>
+</ul>
