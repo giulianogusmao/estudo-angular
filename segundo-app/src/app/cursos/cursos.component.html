@@ -5,8 +5,17 @@
 <br>
 
 <ul class="pagination">
-    <li class="disabled"><a href="#!"><i class="material-icons">chevron_left</i></a></li>
-    <li routerLinkActive="active" class="waves-effect"><a routerLink="/cursos" [queryParams]="{ pagina: 1 }">1</a></li>
-    <li routerLinkActive="active" class="waves-effect"><a routerLink="/cursos" [queryParams]="{ pagina: 2 }">2</a></li>
-    <li class="waves-effect"><a href="#!"><i class="material-icons">chevron_right</i></a></li>
+    <li [ngClass]="{disabled: pagina.btnVoltar?.disabled, 'waves-effect': !pagina.btnVoltar?.disabled }"><a (click)="voltarPagina()" title="Página anterior"><i class="material-icons">chevron_left</i></a></li>
+    <li [ngClass]="{active: pagina.numero == num , 'waves-effect': pagina.numero != num }" *ngFor="let num of pagina.getPaginas()"><a routerLink="/cursos" [queryParams]="{ pagina: num }" title="Ir para página {{ num }}">{{ num }}</a></li>
+    <li [ngClass]="{disabled: pagina.btnProximo?.disabled, 'waves-effect': !pagina.btnProximo?.disabled }"><a (click)="proximaPagina()" title="Próxima página"><i class="material-icons">chevron_right</i></a></li>
 </ul>
+
+<p>
+    Página atual: {{ pagina.numero }} - Repetição: <span *ngIf="pagina.repeat">At</span><span *ngIf="!pagina.repeat">Desat</span>ivado.
+</p>
+
+<button class="btn waves-effect waves-light" (click)="pagina.repeat = !pagina.repeat">
+    <span *ngIf="pagina.repeat">Desativar</span> 
+    <span *ngIf="!pagina.repeat">Ativar</span> 
+    ciclo
+</button>
