@@ -6,7 +6,9 @@ import { LoginComponent } from './login/login.component'
 
 const appRoutes: Routes = [
     { path: '', component: HomeComponent },
-    { path: 'login', component: LoginComponent }
+    { path: 'login', component: LoginComponent },
+    { path: 'cursos', loadChildren: 'app/cursos/cursos.module#CursosModule' }, // lazy loading CursosModule
+    { path: 'alunos', loadChildren: 'app/alunos/alunos.module#AlunosModule' } // lazy loading AlunosModule
 ]
 
 @NgModule({
