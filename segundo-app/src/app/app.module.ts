@@ -6,8 +6,6 @@ import { MaterializeModule } from 'angular2-materialize';
 
 // modulos
 import { AppRoutingModule } from './app.routing.module';
-// import { CursosModule } from './cursos/cursos.module';
-// import { AlunosModule } from './alunos/alunos.module';
 
 // components
 import { AppComponent } from './app.component';
@@ -23,8 +21,6 @@ import { LoginComponent } from './login/login.component';
   imports: [
     BrowserModule,
     MaterializeModule,
-    // CursosModule,
-    // AlunosModule,
     AppRoutingModule,
   ],
   providers: [],
