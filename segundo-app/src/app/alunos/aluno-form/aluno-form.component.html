@@ -1,0 +1,19 @@
+<div class="row">
+  <div class="input-field col s12">
+    <input type="text" placeholder="Nome" [value]="aluno?.nome">
+    <label for="first_name">Nome</label>
+  </div>
+
+  <div class="input-field col s12">
+    <input type="email" placeholder="E-mail" [value]="aluno?.email">
+    <label for="email">E-mail</label>
+  </div>
+</div>
+
+<button class="btn waves-effect waves-light red" (click)="editarAluno()">Cancelar</button>
+<button class="btn waves-effect waves-light" (click)="salvar(aluno)">Salvar</button>
+
+<div class="fixed-action-btn">
+  <a (click)="addAluno()" class="btn-floating btn-large waves-effect waves-light red" title="Adicionar Aluno"><i class="material-icons">add</i></a>
+  <!-- <a (click)="salvar(aluno)" class="btn-floating btn-small waves-effect waves-light red" title="Editar Aluno"><i class="material-icons">send</i></a> -->
+</div>

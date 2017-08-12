@@ -1,0 +1,17 @@
+<h3>Alunos</h3>
+
+<div class="row">
+    <div class="col s6">
+        <div class="collection">
+            <a 
+                class="collection-item" 
+                *ngFor="let aluno of alunos" 
+                [routerLink]="[aluno.id]"
+                [textContent]="aluno.nome"></a>
+        </div>
+    </div>
+
+    <div class="col s6">
+        <router-outlet></router-outlet>
+    </div>
+</div>
