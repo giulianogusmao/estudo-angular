@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 
 // assets
 import { MaterializeModule } from 'angular2-materialize';
@@ -7,23 +8,33 @@ import { MaterializeModule } from 'angular2-materialize';
 // modulos
 import { AppRoutingModule } from './app.routing.module';
 
+// Services
+import { AuthenticationService } from './login/authentication.service';
+
 // components
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
+import { LogoutComponent } from './logout/logout.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
-    LoginComponent
+    LoginComponent,
+    LogoutComponent
   ],
   imports: [
     BrowserModule,
+    FormsModule,
     MaterializeModule,
     AppRoutingModule,
   ],
-  providers: [],
-  bootstrap: [AppComponent]
+  providers: [
+    AuthenticationService
+  ],
+  bootstrap: [
+    AppComponent
+  ]
 })
 export class AppModule { }

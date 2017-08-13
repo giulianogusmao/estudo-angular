@@ -1,3 +1,20 @@
-<p>
-  login works!
-</p>
+<h3>Login</h3>
+
+<div class="row">
+  <div class="input-field col s6 offset-s3">
+    <input type="text" [(ngModel)]="usuario.login">
+    <label for="first_name">Usuário</label>
+  </div>
+</div>
+
+<div class="row">
+  <div class="input-field col s6 offset-s3">
+    <input type="password" [(ngModel)]="usuario.senha">
+    <label for="first_name">Senha</label>
+
+    <button type="submit" class="btn waves-effect waves-light" (click)="login()">
+      Entrar
+      <i class="material-icons right">send</i>
+    </button>
+  </div>
+</div>
