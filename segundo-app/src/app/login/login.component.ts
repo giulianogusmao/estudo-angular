@@ -9,6 +9,7 @@ import { Usuario } from './usuario';
   providers: [Usuario]
 })
 export class LoginComponent implements OnInit {
+  msg: string = null;
 
   constructor(
     private usuario: Usuario,
@@ -19,7 +20,7 @@ export class LoginComponent implements OnInit {
   }
 
   login() {
-    this.authenticationService.fazerLogin(this.usuario);
+    this.msg = (!this.authenticationService.fazerLogin(this.usuario)) ? 'Usuário ou senha inválido' : null;
   }
-
+  
 }

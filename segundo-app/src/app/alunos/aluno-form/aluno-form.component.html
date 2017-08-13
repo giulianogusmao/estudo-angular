@@ -1,16 +1,16 @@
 <div class="row">
   <div class="input-field col s12">
-    <input type="text" placeholder="Nome" [value]="aluno?.nome">
+    <input type="text" placeholder="Nome" [value]="aluno?.nome" (input)="onInput()">
     <label class="active" for="first_name">Nome</label>
   </div>
 
   <div class="input-field col s12">
-    <input type="email" placeholder="E-mail" [value]="aluno?.email">
+    <input type="email" placeholder="E-mail" [value]="aluno?.email" (input)="onInput()">
     <label class="active" for="email">E-mail</label>
   </div>
 </div>
 
-<button class="btn waves-effect waves-light red" (click)="editarAluno()">Cancelar</button>
+<button class="btn waves-effect waves-light red" (click)="cancelar()">Cancelar</button>
 <button class="btn waves-effect waves-light" (click)="salvar(aluno)">Salvar</button>
 
 <div class="fixed-action-btn">

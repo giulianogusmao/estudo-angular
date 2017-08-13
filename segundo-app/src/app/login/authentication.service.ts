@@ -1,33 +1,39 @@
-import { Injectable } from '@angular/core';
+import { Injectable, EventEmitter } from '@angular/core';
 import { Router } from '@angular/router';
 import { Usuario } from './usuario';
-import { EventEmitter } from '@angular/core';
+import { UsuariosService } from './usuarios.service';
 
 @Injectable()
 export class AuthenticationService {
+  usuario: Usuario;
   private usuarioAutenticado: boolean = false;
 
   mostrarMenuEmitter = new EventEmitter<boolean>();
 
   constructor(
-    private router: Router
+    private router: Router,
+    private usuariosService: UsuariosService
   ) { }
 
-  fazerLogin(usuario: Usuario) {
-    if (usuario.login == 'giuliano' && usuario.senha == 'teste') {
-      this.usuarioAutenticado = true;
-      this.mostrarMenuEmitter.emit(true);
+  private setAuthenticate(condition: boolean, usuario: Usuario = <Usuario>{}) {
+    this.usuario = usuario;
+    this.usuarioAutenticado = condition;
+    this.mostrarMenuEmitter.emit(condition);
+  }
+
+  fazerLogin(usuario: Usuario): void | boolean {
+    if (this.usuariosService.validaUsuario(usuario)) {
+      this.setAuthenticate(true, usuario);
       this.router.navigate(['/']);
     } else {
-      this.usuarioAutenticado = false;
-      this.mostrarMenuEmitter.emit(false);
+      this.setAuthenticate(false);
+      return false;
     }
   }
 
-  logout() {
-    setTimeout(()=>{
-      this.usuarioAutenticado = false;
-      this.mostrarMenuEmitter.emit(false);
+  logout(): void {
+    setTimeout(() => {
+      this.setAuthenticate(false);
       this.router.navigate(['/login']);
     }, 1);
   }

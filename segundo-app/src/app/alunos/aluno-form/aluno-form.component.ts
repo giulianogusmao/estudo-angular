@@ -11,6 +11,7 @@ import { AlunosService } from './../alunos.service';
 export class AlunoFormComponent implements OnInit, OnDestroy {
   aluno: object = {};
   inscricao: Subscription;
+  private formMudou: boolean = false;
 
   constructor(
     private _route: ActivatedRoute,
@@ -35,11 +36,29 @@ export class AlunoFormComponent implements OnInit, OnDestroy {
     this.inscricao.unsubscribe();
   }
 
-  addAluno() {
+  addAluno(): void {
     this._router.navigate(['/alunos', 'novo']);
   }
 
-  salvar(aluno: object) {
+  salvar(aluno: object): void {
     this._alunosSevice.saveAluno(aluno);
-  }  
+    this.formMudou = false;
+    this._router.navigate(['/alunos']);
+  } 
+
+  cancelar(): void {
+    this._router.navigate(['/alunos']);
+  }
+
+  onInput(): void {
+    this.formMudou = true;
+  }
+
+  podeMudarRota() {
+    if (this.formMudou) {
+      return confirm('Tem certeza que deseja sair desta página? As mudanças não serão salvas.');
+    }
+
+    return true;
+  }
 }
