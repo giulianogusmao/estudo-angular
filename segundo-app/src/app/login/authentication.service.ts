@@ -32,4 +32,8 @@ export class AuthenticationService {
     }, 1);
   }
 
+  isAutenticado(): boolean {
+    return this.usuarioAutenticado;
+  }
+
 }

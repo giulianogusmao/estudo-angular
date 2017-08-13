@@ -9,6 +9,7 @@ import { MaterializeModule } from 'angular2-materialize';
 import { AppRoutingModule } from './app.routing.module';
 
 // Services
+import { AuthenticateGuard } from './guards/authenticate.guard';
 import { AuthenticationService } from './login/authentication.service';
 
 // components
@@ -31,7 +32,8 @@ import { LogoutComponent } from './logout/logout.component';
     AppRoutingModule,
   ],
   providers: [
-    AuthenticationService
+    AuthenticationService,
+    AuthenticateGuard
   ],
   bootstrap: [
     AppComponent
