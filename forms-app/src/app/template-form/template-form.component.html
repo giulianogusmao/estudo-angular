@@ -1,0 +1,50 @@
+<form #f="ngForm" (ngSubmit)="onSubmit(f, nome, email)">
+  <div class="form-group">
+    <label for="nome">Nome</label>
+    <input 
+      type="text" 
+      class="form-control"
+      [ngClass]="{'is-invalid': !nome.valid && nome.touched }"
+      id="nome" 
+      name="nome" 
+      [(ngModel)]="usuario.nome" 
+      aria-describedby="nomeHelp" 
+      placeholder="Enter nome"
+      required 
+      #campoNome
+      #nome="ngModel"
+    >
+    <small id="emailHelp" class="form-text text-muted"><b>Classes aplicadas: </b>{{ campoNome.className }}</small>
+    <div class="invalid-feedback">
+      Campo obrigatório!
+    </div>
+  </div>
+  
+  <div class="form-group">
+    <label for="email">E-mail</label>
+    <input 
+    type="email" 
+    class="form-control" 
+    [ngClass]="{'is-invalid': !email.valid && email.touched }"
+    id="email" 
+    name="email" 
+    [(ngModel)]="usuario.email" 
+    aria-describedby="emailHelp" 
+    placeholder="Enter email" 
+    value="teste@teste.com"
+    required
+    email
+    #campoEmail
+    #email="ngModel"
+    >
+    <small id="emailHelp" class="form-text text-muted"><b>Classes aplicadas: </b>{{ campoEmail.className }}</small>
+    <div class="invalid-feedback" *ngIf="!email.value">
+      Campo obrigatório!
+    </div>
+    <div class="invalid-feedback" *ngIf="email.value">
+      Campo inválido!
+    </div>
+  </div>
+  
+  <button type="submit" class="btn btn-primary" [disabled]="!f.valid">Submit</button>
+</form>
