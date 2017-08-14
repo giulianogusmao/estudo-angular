@@ -16,6 +16,8 @@ export class AuthenticateGuard implements CanActivate {
     state: RouterStateSnapshot
   ): Observable<boolean> | Promise<boolean> | boolean {
 
+    // console.log('validando acesso a aplicação: AuthenticateGuard');
+
     if (this.authenticationService.isAutenticado()) {
       return true;
     } else {

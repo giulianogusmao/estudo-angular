@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { AlunosGuard } from './guards/alunos.guard';
 import { AlunosDeactivateGuard } from './guards/alunos-deactivate.guard';
+import { AlunoDetalheResolver } from './guards/aluno-detalhe.resolver';
 
 import { AlunosComponent } from './alunos.component';
 import { AlunoDetalheComponent } from './aluno-detalhe/aluno-detalhe.component';
@@ -21,7 +22,10 @@ const ALUNOS_ROUTES: Routes = [
             },
             { 
                 path: ':id', 
-                component: AlunoDetalheComponent 
+                component: AlunoDetalheComponent,
+                resolve: {
+                    aluno: AlunoDetalheResolver
+                }
             },
             { 
                 path: ':id/editar', 

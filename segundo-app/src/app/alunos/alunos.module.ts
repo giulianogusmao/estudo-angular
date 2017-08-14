@@ -7,6 +7,7 @@ import { AlunosRoutingModule } from './alunos.routing.module';
 import { AlunosService } from './alunos.service';
 import { AlunosGuard } from './guards/alunos.guard';
 import { AlunosDeactivateGuard } from './guards/alunos-deactivate.guard';
+import  { AlunoDetalheResolver } from './guards/aluno-detalhe.resolver';
 
 import { AlunosComponent } from './alunos.component';
 import { AlunoFormComponent } from './aluno-form/aluno-form.component';
@@ -29,7 +30,8 @@ import { AlunoDetalheComponent } from './aluno-detalhe/aluno-detalhe.component';
     providers: [
         AlunosService,
         AlunosGuard,
-        AlunosDeactivateGuard
+        AlunosDeactivateGuard,
+        AlunoDetalheResolver
     ]
 })
 
