@@ -8,13 +8,9 @@ import { CursosGuard } from './guards/cursos.guard';
 import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
 import { LogoutComponent } from './logout/logout.component';
+import { PaginaNaoEncontradaComponent } from './pagina-nao-encontrada/pagina-nao-encontrada.component';
 
 const appRoutes: Routes = [
-    { 
-        path: '', 
-        component: HomeComponent, 
-        canActivate: [AuthenticateGuard], // verifica se o usuário tem acesso à aplicação
-    },
     { 
         path: 'login', 
         component: LoginComponent 
@@ -37,7 +33,22 @@ const appRoutes: Routes = [
         canActivate: [AuthenticateGuard], // verifica se o usuário tem acesso à aplicação
         canLoad: [AuthenticateGuard], // verifica se o usuário pode carregar o módulo
         // canActivateChild: [AlunosGuard] 
-    } 
+    }, 
+    { 
+        path: 'home', 
+        component: HomeComponent, 
+        canActivate: [AuthenticateGuard], // verifica se o usuário tem acesso à aplicação
+    },
+    { 
+        path: '',
+        redirectTo: '/home',
+        pathMatch: 'full'
+    },
+    {
+        path: '**',
+        component: PaginaNaoEncontradaComponent,
+        // canActivate: [AuthenticateGuard], // verifica se o usuário tem acesso à aplicação
+    }
 ]
 
 @NgModule({
