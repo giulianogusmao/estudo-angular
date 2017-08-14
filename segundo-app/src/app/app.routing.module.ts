@@ -13,7 +13,7 @@ const appRoutes: Routes = [
     { 
         path: '', 
         component: HomeComponent, 
-        canActivate: [AuthenticateGuard] 
+        canActivate: [AuthenticateGuard], // verifica se o usuário tem acesso à aplicação
     },
     { 
         path: 'login', 
@@ -27,13 +27,15 @@ const appRoutes: Routes = [
     { 
         path: 'cursos', 
         loadChildren: 'app/cursos/cursos.module#CursosModule', // lazy loading CursosModule
-        canActivate: [AuthenticateGuard],
-        canActivateChild: [CursosGuard] 
+        canActivate: [AuthenticateGuard], // verifica se o usuário tem acesso à aplicação
+        canLoad: [AuthenticateGuard], // verifica se o usuário pode carregar o módulo
+        canActivateChild: [CursosGuard], // verifica restrições as rotas filhas
     }, 
     { 
         path: 'alunos', 
         loadChildren: 'app/alunos/alunos.module#AlunosModule', // lazy loading AlunosModule
-        canActivate: [AuthenticateGuard], 
+        canActivate: [AuthenticateGuard], // verifica se o usuário tem acesso à aplicação
+        canLoad: [AuthenticateGuard], // verifica se o usuário pode carregar o módulo
         // canActivateChild: [AlunosGuard] 
     } 
 ]
