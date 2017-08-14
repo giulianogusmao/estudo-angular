@@ -8,6 +8,9 @@ import { MaterializeModule } from 'angular2-materialize';
 // modulos
 import { AppRoutingModule } from './app.routing.module';
 
+// Interface
+// import { iFormDeactivate } from './guards/iform-deactivate.guard';
+
 // Services
 import { UsuariosService } from './login/usuarios.service';
 import { AuthenticateGuard } from './guards/authenticate.guard';
@@ -37,7 +40,8 @@ import { LogoutComponent } from './logout/logout.component';
     UsuariosService,
     AuthenticationService,
     AuthenticateGuard,
-    CursosGuard
+    CursosGuard,
+    // iFormDeactivate,
   ],
   bootstrap: [
     AppComponent
