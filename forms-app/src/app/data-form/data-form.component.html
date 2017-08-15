@@ -3,13 +3,16 @@
   <div class="row">
     <div class="col">
       <div class="form-group">
-        <label>Nome</label>
+        <label>Nome: <span class="text-danger">*</span></label>
         <input type="text" class="form-control" [ngClass]="aplicaCssErro('nome')" formControlName="nome" placeholder="Enter nome">
         <msg-error-form [condicao]="isNull('nome')"></msg-error-form>
+        <div class="invalid-feedback" *ngIf="isNull('nome')">
+          Campo é obrigatório
+        </div>
       </div>
 
       <div class="form-group">
-        <label>E-mail</label>
+        <label>E-mail: <span class="text-danger">*</span></label>
         <input type="email" class="form-control" [ngClass]="[aplicaCssErro('email'), aplicaCssValid('email')]" formControlName="email"
           placeholder="Enter email">
         <msg-error-form [condicao]="isNull('email')"></msg-error-form>
@@ -21,15 +24,16 @@
     <div class="col" formGroupName="endereco">
 
       <div class="form-group">
-        <label>CEP</label>
-        <input type="text" class="form-control" [ngClass]="aplicaCssErro('endereco.cep')" formControlName="cep" placeholder="CEP" (blur)="consultaCEP()">
+        <label>CEP: <span class="text-danger">*</span></label>
+        <input type="text" class="form-control" [ngClass]="aplicaCssErro('endereco.cep')" formControlName="cep" placeholder="CEP"
+          (blur)="consultaCEP()">
         <msg-error-form [condicao]="isNull('endereco.cep')"></msg-error-form>
       </div>
 
       <div class="row">
         <div class="col">
           <div class="form-group">
-            <label>Rua</label>
+            <label>Rua: <span class="text-danger">*</span></label>
             <input type="text" class="form-control" [ngClass]="aplicaCssErro('endereco.rua')" formControlName="rua" placeholder="rua">
             <msg-error-form [condicao]="isNull('endereco.rua')"></msg-error-form>
           </div>
@@ -37,7 +41,7 @@
 
         <div class="col-sm-3">
           <div class="form-group">
-            <label>Número</label>
+            <label>Número: <span class="text-danger">*</span></label>
             <input type="text" class="form-control" [ngClass]="aplicaCssErro('endereco.numero')" formControlName="numero" placeholder="Número">
             <msg-error-form [condicao]="isNull('endereco.numero')"></msg-error-form>
           </div>
@@ -47,7 +51,7 @@
       <div class="row">
         <div class="col">
           <div class="form-group">
-            <label>Bairro</label>
+            <label>Bairro: <span class="text-danger">*</span></label>
             <input type="text" class="form-control" [ngClass]="aplicaCssErro('endereco.bairro')" formControlName="bairro" placeholder="Bairro">
             <msg-error-form [condicao]="isNull('endereco.bairro')"></msg-error-form>
           </div>
@@ -55,7 +59,7 @@
 
         <div class="col">
           <div class="form-group">
-            <label>Complemento</label>
+            <label>Complemento: </label>
             <input type="text" class="form-control" [ngClass]="aplicaCssErro('endereco.complemento')" formControlName="complemento" placeholder="complemento">
           </div>
         </div>
@@ -64,7 +68,7 @@
       <div class="row">
         <div class="col">
           <div class="form-group">
-            <label>Cidade</label>
+            <label>Cidade: <span class="text-danger">*</span></label>
             <input type="text" class="form-control" [ngClass]="aplicaCssErro('endereco.cidade')" formControlName="cidade" placeholder="Cidade">
             <msg-error-form [condicao]="isNull('endereco.cidade')"></msg-error-form>
           </div>
@@ -72,7 +76,7 @@
 
         <div class="col">
           <div class="form-group">
-            <label>Estado</label>
+            <label>Estado: <span class="text-danger">*</span></label>
             <input type="text" class="form-control" [ngClass]="aplicaCssErro('endereco.estado')" formControlName="estado" placeholder="estado">
             <msg-error-form [condicao]="isNull('endereco.estado')"></msg-error-form>
           </div>

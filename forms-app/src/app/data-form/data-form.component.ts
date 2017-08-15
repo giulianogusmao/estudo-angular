@@ -44,43 +44,57 @@ export class DataFormComponent implements OnInit {
 
         //Expressão regular para validar o CEP.
         var validacep = /^[0-9]{8}$/;
-        console.log(validacep.test(cep));
 
         //Valida o formato do CEP.
         if (validacep.test(cep)) {
           //Sincroniza com o callback.
           let url = `//viacep.com.br/ws/${cep}/json`;
-          console.log(url);
 
           this.http.get(url)
             .map(dados => dados.json())
-            .subscribe(dados => this.populaDadosForm(dados));
+            .subscribe(
+            dados => this.populaDadosForm(dados),
+            error => this.populaDadosForm(null, error)
+            );
         }
       }
     } catch (e) { }
   }
 
-  private populaDadosForm(dados) {
-    this.formulario.patchValue({
-      endereco: {
-        rua: dados.logradouro,
-        complemento: dados.complemento,
-        bairro: dados.bairro,
-        cidade: dados.localidade,
-        estado: dados.uf
-      }
-    });
+  private populaDadosForm(dados, error = null): void {
 
-    this.touchCamposEndereco();
+    if (dados) {
+      this.formulario.patchValue({
+        endereco: {
+          rua: dados.logradouro,
+          complemento: dados.complemento,
+          bairro: dados.bairro,
+          cidade: dados.localidade,
+          estado: dados.uf
+        }
+      });
+
+      this.touchCamposEndereco();
+    }
   }
 
   private touchCamposEndereco() {
     console.log('test');
-    Object.keys(this.formulario.get('endereco').value).forEach( key => {
+    Object.keys(this.formulario.get('endereco').value).forEach(key => {
       const campo = this.formulario.get('endereco.' + key);
       if (campo instanceof FormControl) {
         campo.markAsDirty();
-        campo.markAsTouched();
+      }
+    });
+  }
+
+  private sinalizaCampos(formulario: FormGroup) {
+    Object.keys(formulario.controls).forEach(campo => {
+      const controle = formulario.get(campo);
+      controle.markAsDirty();
+
+      if (controle instanceof FormGroup) {
+        this.sinalizaCampos(controle);
       }
     });
   }
@@ -88,16 +102,23 @@ export class DataFormComponent implements OnInit {
   onSubmit() {
     console.log(this.formulario);
 
-    this.http.post('https://httpbin.org/post',
-      JSON.stringify(this.formulario.value))
-      // .map(res => res)
-      .subscribe(dados => {
-        this.resetForm();
-      },
-      (erro: any) => {
-        alert('Erro ao enviar dados');
-      }
-      );
+    if (this.formulario.valid) {
+      this.http.post('https://httpbin.org/post',
+        JSON.stringify(this.formulario.value))
+        // .map(res => res)
+        .subscribe(
+        dados => {
+          this.resetForm();
+        },
+        (erro: any) => {
+          alert('Erro ao enviar dados');
+        }
+        );
+    } else {
+      console.log('formulário inválido');
+
+      this.sinalizaCampos(this.formulario);
+    }
   }
 
   resetForm() {
