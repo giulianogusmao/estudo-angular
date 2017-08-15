@@ -1,17 +1,23 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { HttpModule } from '@angular/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
+import { DebugFormModule } from './../debug-form/debug-form.module';
 import { DataFormComponent } from './data-form.component';
+import { MsgErrorFormComponent } from './msg-error-form/msg-error-form.component';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    HttpModule,
+    DebugFormModule
   ],
   declarations: [
-    DataFormComponent
+    DataFormComponent,
+    MsgErrorFormComponent
   ]
 })
 export class DataFormModule { }

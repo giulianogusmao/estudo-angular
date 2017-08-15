@@ -14,13 +14,13 @@ import { DataFormModule } from './data-form/data-form.module';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     TemplateFormModule,
-    DataFormModule
+    DataFormModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
