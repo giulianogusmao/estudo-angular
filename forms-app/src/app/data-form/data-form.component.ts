@@ -1,23 +1,34 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Http } from '@angular/http';
 import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
+import { Subscription } from 'rxjs/Rx';
 import 'rxjs/add/operator/map';
+
+import { DropdownService } from './../shared/services/dropdown.service';
+import { EstadoBR } from './../shared/models/estado-br';
 
 @Component({
   selector: 'app-data-form',
   templateUrl: './data-form.component.html',
   styleUrls: ['./data-form.component.sass']
 })
-export class DataFormComponent implements OnInit {
+export class DataFormComponent implements OnInit, OnDestroy {
 
   formulario: FormGroup;
+  estados: EstadoBR[];
 
   constructor(
     private formBuilder: FormBuilder,
-    private http: Http
+    private http: Http,
+    private dropdownService: DropdownService
   ) { }
 
   ngOnInit() {
+
+    this.dropdownService.getEstadosBR().subscribe(
+      dados => this.estados = dados
+    )
+
     this.formulario = this.formBuilder.group({
       nome: [null, Validators.required],
       email: [null, [Validators.required, Validators.email]],
@@ -31,6 +42,9 @@ export class DataFormComponent implements OnInit {
         estado: [null, Validators.required],
       })
     });
+  }
+
+  ngOnDestroy() {
   }
 
   consultaCEP() {
@@ -100,7 +114,7 @@ export class DataFormComponent implements OnInit {
   }
 
   onSubmit() {
-    console.log(this.formulario);
+    // console.log(this.formulario);
 
     if (this.formulario.valid) {
       this.http.post('https://httpbin.org/post',
@@ -115,7 +129,7 @@ export class DataFormComponent implements OnInit {
         }
         );
     } else {
-      console.log('formulário inválido');
+      // console.log('formulário inválido');
 
       this.sinalizaCampos(this.formulario);
     }

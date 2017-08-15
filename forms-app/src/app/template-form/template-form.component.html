@@ -25,7 +25,9 @@
 
   <!-- <button type="button" class="btn btn-danger" [disabled]="!f.dirty">Cancelar</button> -->
   <button type="submit" class="btn btn-primary" [disabled]="!f.valid">
-    Enviar 
+    Enviar
     <!-- <i class="material-icons md-18 orange600">send</i> -->
   </button>
 </form>
+
+<app-debug-form [form]="f"></app-debug-form>

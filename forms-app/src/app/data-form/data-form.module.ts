@@ -4,6 +4,7 @@ import { HttpModule } from '@angular/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { DebugFormModule } from './../debug-form/debug-form.module';
+import { SharedModule } from './../shared/shared.module';
 import { DataFormComponent } from './data-form.component';
 import { MsgErrorFormComponent } from './msg-error-form/msg-error-form.component';
 
@@ -13,7 +14,8 @@ import { MsgErrorFormComponent } from './msg-error-form/msg-error-form.component
     FormsModule,
     ReactiveFormsModule,
     HttpModule,
-    DebugFormModule
+    DebugFormModule,
+    SharedModule
   ],
   declarations: [
     DataFormComponent,
