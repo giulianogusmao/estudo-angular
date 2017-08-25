@@ -3,7 +3,7 @@
         <h3>Cursos</h3>
 
         <div class="collection">
-            <a [routerLink]="['/cursos', curso.id]" class="collection-item" *ngFor="let curso of cursos">{{ curso.nome }}</a>
+            <a [routerLink]="['/cursos', curso.id]" class="collection-item" *ngFor="let curso of cursos">{{ curso.nome | cursoNome }}</a>
         </div>
     </div>
 
@@ -24,7 +24,7 @@
 </p>
 
 <button class="btn waves-effect waves-light" (click)="pagina.repeat = !pagina.repeat">
-    <span *ngIf="pagina.repeat">Desativar</span> 
-    <span *ngIf="!pagina.repeat">Ativar</span> 
+    <span *ngIf="pagina.repeat">Desativar</span>
+    <span *ngIf="!pagina.repeat">Ativar</span>
     ciclo
 </button>
