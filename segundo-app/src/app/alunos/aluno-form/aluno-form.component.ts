@@ -13,6 +13,7 @@ import { Aluno } from '../aluno';
 export class AlunoFormComponent implements OnInit, OnDestroy, iFormCanDeactivate {
   aluno: Aluno = {};
   inscricao: Subscription;
+  formExcluir: boolean = false;
   private formMudou: boolean = false;
 
   constructor(
@@ -22,6 +23,7 @@ export class AlunoFormComponent implements OnInit, OnDestroy, iFormCanDeactivate
   ) { }
 
   ngOnInit() {
+    this.formExcluir = this._router.url.indexOf('/excluir') >= 0;
     this.inscricao = this._route.params.subscribe(
       (params: any) => {
         let aluno = new Aluno();
@@ -44,6 +46,12 @@ export class AlunoFormComponent implements OnInit, OnDestroy, iFormCanDeactivate
 
   salvar(aluno: Aluno): void {
     this._alunosSevice.saveAluno(aluno);
+    this.formMudou = false;
+    this._router.navigate(['/alunos']);
+  }
+
+  excluir(aluno: Aluno): void {
+    this._alunosSevice.deleteAluno(aluno['id']);
     this.formMudou = false;
     this._router.navigate(['/alunos']);
   }

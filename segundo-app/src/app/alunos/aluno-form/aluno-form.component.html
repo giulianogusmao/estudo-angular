@@ -1,17 +1,20 @@
 <div class="row">
   <div class="input-field col s12">
-    <input type="text" placeholder="Nome" [(ngModel)]="aluno.nome" (input)="onInput()">
+    <input type="text" placeholder="Nome" [(ngModel)]="aluno.nome" (input)="onInput()" [disabled]="formExcluir">
     <label class="active" for="first_name">Nome</label>
   </div>
 
   <div class="input-field col s12">
-    <input type="email" placeholder="E-mail" [(ngModel)]="aluno.email" (input)="onInput()">
+    <input type="email" placeholder="E-mail" [(ngModel)]="aluno.email" (input)="onInput()" [disabled]="formExcluir">
     <label class="active" for="email">E-mail</label>
   </div>
 </div>
 
-<button class="btn waves-effect waves-light red" (click)="cancelar()">Cancelar</button>
-<button class="btn waves-effect waves-light" (click)="salvar(aluno)">Salvar</button>
+<button class="btn waves-effect waves-light" [ngClass]="{ 'red': !formExcluir }" (click)="cancelar()">Cancelar</button>
+<button class="btn waves-effect waves-light" (click)="salvar(aluno)" *ngIf="!formExcluir; else btnExcluir">Salvar</button>
+<ng-template #btnExcluir>
+  <button class="btn waves-effect waves-light red" (click)="excluir(aluno)">Excluir</button>
+</ng-template>
 
 <div class="fixed-action-btn">
   <a (click)="addAluno()" class="btn-floating btn-large waves-effect waves-light red" title="Adicionar Aluno"><i class="material-icons">add</i></a>
