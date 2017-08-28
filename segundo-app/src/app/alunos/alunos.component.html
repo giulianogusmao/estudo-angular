@@ -3,9 +3,9 @@
 <div class="row">
     <div class="col s6">
         <div class="collection">
-            <a 
-                class="collection-item" 
-                *ngFor="let aluno of alunos" 
+            <a
+                class="collection-item"
+                *ngFor="let aluno of alunos"
                 [routerLink]="[aluno.id]"
                 [textContent]="aluno.nome"></a>
         </div>
@@ -14,4 +14,10 @@
     <div class="col s6">
         <router-outlet></router-outlet>
     </div>
+</div>
+
+
+<div class="fixed-action-btn">
+  <a (click)="addAluno()" class="btn-floating btn-large waves-effect waves-light red" title="Adicionar Aluno"><i class="material-icons">add</i></a>
+  <!-- <a  class="btn-floating btn-small waves-effect waves-light blue" title="Editar Aluno"><i class="material-icons">edit</i></a> -->
 </div>

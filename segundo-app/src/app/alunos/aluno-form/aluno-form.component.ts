@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs/Rx';
 import { iFormCanDeactivate } from './../../guards/iform-candeactivate';
 import { AlunosService } from './../alunos.service';
+import { Aluno } from '../aluno';
 
 @Component({
   selector: 'app-aluno-form',
@@ -10,7 +11,7 @@ import { AlunosService } from './../alunos.service';
   styleUrls: ['./aluno-form.component.scss']
 })
 export class AlunoFormComponent implements OnInit, OnDestroy, iFormCanDeactivate {
-  aluno: object = {};
+  aluno: Aluno = {};
   inscricao: Subscription;
   private formMudou: boolean = false;
 
@@ -23,7 +24,11 @@ export class AlunoFormComponent implements OnInit, OnDestroy, iFormCanDeactivate
   ngOnInit() {
     this.inscricao = this._route.params.subscribe(
       (params: any) => {
-        this.aluno = this._alunosSevice.getAluno(params['id']);
+        let aluno = new Aluno();
+        aluno = <Aluno>this._alunosSevice.getAluno(params['id']);
+        this.aluno.id = aluno.id;
+        this.aluno.nome = aluno.nome;
+        this.aluno.email = aluno.email;
 
         if (!this.aluno['id']) {
           this.aluno['nome'] = null;
@@ -37,15 +42,11 @@ export class AlunoFormComponent implements OnInit, OnDestroy, iFormCanDeactivate
     this.inscricao.unsubscribe();
   }
 
-  addAluno(): void {
-    this._router.navigate(['/alunos', 'novo']);
-  }
-
-  salvar(aluno: object): void {
+  salvar(aluno: Aluno): void {
     this._alunosSevice.saveAluno(aluno);
     this.formMudou = false;
     this._router.navigate(['/alunos']);
-  } 
+  }
 
   cancelar(): void {
     this._router.navigate(['/alunos']);

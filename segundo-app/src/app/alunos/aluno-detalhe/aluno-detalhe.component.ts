@@ -38,10 +38,6 @@ export class AlunoDetalheComponent implements OnInit, OnDestroy {
     this.inscricao.unsubscribe();
   }
 
-  addAluno() {
-    this._router.navigate(['/alunos', 'novo']);
-  }
-
   editarAluno() {
     this._router.navigate(['/alunos', this.aluno['id'], 'editar'])
   }

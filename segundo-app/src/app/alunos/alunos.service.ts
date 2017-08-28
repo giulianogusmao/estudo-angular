@@ -11,13 +11,17 @@ export class AlunosService {
 
   constructor() { }
 
+  clearAlunos(): void {
+    this.alunos = [];
+  }
+
   getAlunos(): Aluno[] {
     return this.alunos;
   }
 
   getAluno(id: number): Aluno | object {
     let aluno = this.alunos.filter(
-      (aluno) => { 
+      (aluno) => {
         return aluno['id'] == id;
       }
     )
@@ -36,7 +40,7 @@ export class AlunosService {
       }
     }
 
-    if (!update) {      
+    if (!update) {
       let id = 0;
       for (let aluno of this.getAlunos()) {
           if (aluno['id'] > id)
