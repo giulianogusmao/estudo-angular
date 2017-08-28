@@ -15,6 +15,10 @@ export class AlunosService {
     this.alunos = [];
   }
 
+  private _getAlunoIndex(id: number): number {
+    return this.alunos.findIndex(aluno => aluno.id === id);
+  }
+
   getAlunos(): Aluno[] {
     return this.alunos;
   }
@@ -29,26 +33,30 @@ export class AlunosService {
     return aluno.length ? aluno[0] : {};
   }
 
-  saveAluno(aluno: object) {
-    let update = false;
-      // console.log(aluno);
-
-    for(let i=0, max=this.alunos.length; i<max; i++) {
-      if (this.alunos[i]['id'] == aluno['id']) {
-        this.alunos.splice(i, 1, aluno);
-        update = true;
+  saveAluno(aluno: object): number {
+    // verifica se o aluno possui um id, caso possua procura o aluno na lista e atualiza seus dados
+    if (aluno['id']) {
+      let index: number = this._getAlunoIndex(aluno['id']);
+      if (index >= 0) {
+        this.alunos.splice(index, 1, aluno);
+        return aluno['id'];
       }
     }
 
-    if (!update) {
-      let id = 0;
-      for (let aluno of this.getAlunos()) {
-          if (aluno['id'] > id)
-            id = aluno['id'];
-      }
-
-      let novoAluno = new Aluno((id + 1), aluno['nome'], aluno['email']);
-      this.alunos.push(novoAluno);
+    // caso o aluno não possua um id, cria um novo objeto, instancia com os valores recebidos e insere na lista de alunos
+    let id = 0;
+    for (let aluno of this.getAlunos()) {
+      if (aluno['id'] > id)
+        id = aluno['id'];
     }
+
+    let novoAluno = new Aluno((id + 1), aluno['nome'], aluno['email']);
+    this.alunos.push(novoAluno);
+    return novoAluno['id'];
+  }
+
+  deleteAluno(id: number): void {
+    let index: number = this._getAlunoIndex(id);
+    this.alunos.splice(index, 1);
   }
 }
